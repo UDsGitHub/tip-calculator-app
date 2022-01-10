@@ -1,38 +1,304 @@
-.App {
-  text-align: center;
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
+
+/* ==========================================================================
+   Setup styles
+   ========================================================================== */
+
+:root {
+  --Strong-cyan: hsl(172, 67%, 45%);
+  --Very-dark-cyan: hsl(183, 100%, 15%);
+  --Dark-grayish-cyan1: hsl(186, 14%, 43%);
+  --Dark-grayish-cyan2: hsl(184, 14%, 56%);
+  --Light-grayish-cyan1: hsl(185, 41%, 84%);
+  --Light-grayish-cyan2: hsl(189, 41%, 97%);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  font-family: "Space Mono", sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+body {
   min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background-color: var(--Light-grayish-cyan1);
+  padding: 2rem;
+}
+
+#root,
+.App {
+  width: 100%;
+  height: 100%;
+}
+
+.App {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+/* ==========================================================================
+   Main page content
+   ========================================================================== */
+
+h4 {
+  margin-bottom: 0.5rem;
+}
+
+.headerlogo {
+  display: block;
+  margin: 0 auto;
+}
+
+.main {
+  max-width: 57rem;
+  margin-top: 5rem;
+  border-radius: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 2rem;
+  background-color: white;
+  padding: 2rem;
+  color: var(--Dark-grayish-cyan1);
+}
+
+/* ==========================================================================
+   Input section styling
+   ========================================================================== */
+
+/* Input and other styles
+   ========================================================================== */
+
+input {
+  color: var(--Very-dark-cyan);
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type="number"] {
+  border-radius: 0.3rem;
+  border: 0;
+  background-color: var(--Light-grayish-cyan2);
+  font-size: 1.5rem;
+  padding: 1rem;
+  width: 100%;
+  text-align: right;
+  font-weight: 700;
+}
+input[type="number"]::placeholder {
+  color: var(--Dark-grayish-cyan2);
+}
+input[type="number"]:focus {
+  outline: 2px solid var(--Strong-cyan);
+}
+
+.billvalue,
+.npeople-value {
+  position: relative;
+}
+
+.icon {
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.billvalue {
+  margin-bottom: 1rem;
+}
+
+.tip,
+.billinput,
+.npeopleinput,
+.customtip-input,
+.reset {
+  height: 3rem;
+}
+
+.billvalue,
+.tip-sec {
+  margin-bottom: 2.5rem;
+}
+
+/* Tips styling
+   ========================================================================== */
+
+/**
+ * Using appearance none on tip radio buttons because the radio buttons are
+ * only needed for registering onclick events and maintaining only one clicked
+ * option at a time. As such, their appearance is hidden and the label is used 
+ * instead for triggering clicks.
+ */
+
+.tipradio {
+  appearance: none;
+}
+
+.tip {
+  cursor: pointer;
+  border-radius: 0.3rem;
+  background-color: var(--Very-dark-cyan);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.tip-text {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tip:hover {
+  background-color: #9fe8df;
+  color: var(--Very-dark-cyan);
+  transition: 0.3s;
+}
+
+.tipradio:checked + .tip-text {
+  background-color: var(--Strong-cyan);
+  color: var(--Very-dark-cyan);
+}
+
+.tips {
+  margin: 1rem 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 0.5rem;
+}
+
+.customtip-input {
+  font-weight: 700;
+}
+
+.customtip-input::placeholder {
+  color: red;
+}
+
+/* Npeople styling + error state styling
+   ========================================================================== */
+
+.npeople-label {
+  display: flex;
+  justify-content: space-between;
+}
+
+input.npeople-error,
+input.npeople-error:focus {
+  outline: 2px solid rgb(226, 114, 39);
+}
+
+span.npeople-error {
+  color: rgb(226, 114, 39);
+  font-weight: bold;
+}
+
+/* ==========================================================================
+   Output section styling
+   ========================================================================== */
+
+.output-sec {
+  border-radius: 1rem;
+  background-color: hsl(183, 100%, 15%);
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.tip-amount,
+.total {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tip-amount p,
+.total p {
+  font-size: 0.8rem;
+}
+
+.tip-amount h4,
+.total h4 {
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.tip-amount p,
+.total p {
+  color: var(--Dark-grayish-cyan2);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.output-value {
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--Strong-cyan);
+}
+
+.reset {
+  border: 0;
+  border-radius: 0.3rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  background-color: #0d686d;
+  color: #0c585c;
+}
+
+.reset.active {
+  background-color: var(--Strong-cyan);
+  color: var(--Very-dark-cyan);
+  cursor: pointer;
+  transition: 0.3s;
+}
+.reset.active:hover {
+  background-color: #9fe8df;
+  transform: scale(1.025);
+}
+
+/* ==========================================================================
+   Responsive Styles
+   ========================================================================== */
+
+/* Larger screens */
+@media (max-width: 1024px) {
+  html {
+    font-size: 1.5vw;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+/* Tablet screens and below */
+@media (max-width: 768px) {
+  html {
+    font-size: 12px;
+  }
+  body {
+    padding: 0;
+  }
+  .App {
+    padding-top: 3rem;
+    align-items: initial;
+    justify-content: flex-end;
+  }
+  .main {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    /* margin: 0; */
+    max-width: 100%;
+    grid-template-columns: 1fr;
+  }
+  .tips {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-rows: initial;
   }
 }
